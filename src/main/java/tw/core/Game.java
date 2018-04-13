@@ -1,16 +1,15 @@
 package tw.core;
 
-import com.google.inject.Inject;
-import tw.core.exception.OutOfRangeAnswerException;
-import tw.core.generator.AnswerGenerator;
-import tw.core.model.GuessResult;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static tw.core.GameStatus.CONTINUE;
 import static tw.core.GameStatus.FAIL;
 import static tw.core.GameStatus.SUCCESS;
+
+import com.google.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import tw.core.exception.OutOfRangeAnswerException;
+import tw.core.generator.AnswerGenerator;
+import tw.core.model.GuessResult;
 
 /**
  * Created by jxzhong on 2017/5/16.
@@ -46,7 +45,7 @@ public class Game {
 
     public String checkStatus() {
         String status;
-        if (guessResults.size() >= MAX_TIMES) {
+        if (guessResults.size() > MAX_TIMES|| (guessResults.size() == MAX_TIMES && !checkCorrectGuessResult())) {
             status = FAIL;
         } else if (checkCorrectGuessResult()) {
             status = SUCCESS;
